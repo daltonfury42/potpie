@@ -100,6 +100,15 @@ Potpie provides a set of tools that agents can use to interact with the knowledg
 ### Setup Steps
 
 1. **Prepare Your Environment**
+   - (Optional) Create a python virtual env:
+     ```bash
+     python3 -m venv .venv
+     source .venv/bin/activate
+     ```
+   - Install project dependencies:
+     ```bash
+     pip install -r requirements.txt
+     ```
    - Create a `.env` file based on the `.env.template`
    - Add the following required configurations:
      ```bash
@@ -108,13 +117,12 @@ Potpie provides a set of tools that agents can use to interact with the knowledg
      OPENAI_API_KEY=<your-openai-key>
      ```
 
-2. **Start Potpie**
+3. **Start Potpie**
    ```bash
-   chmod +x start.sh
    ./start.sh
    ```
 
-3. **Authentication Setup** (Skip this step in development mode)
+4. **Authentication Setup** (Skip this step in development mode)
    ```bash
    curl -X POST 'http://localhost:8001/api/v1/login' \
      -H 'Content-Type: application/json' \
@@ -125,7 +133,7 @@ Potpie provides a set of tools that agents can use to interact with the knowledg
    # Save the bearer token from the response for subsequent requests
    ```
 
-4. **Initialize Repository Parsing**
+5. **Initialize Repository Parsing**
    ```bash
    # For development mode:
    curl -X POST 'http://localhost:8001/api/v1/parse' \
@@ -145,19 +153,19 @@ Potpie provides a set of tools that agents can use to interact with the knowledg
    # Save the project_id from the response
    ```
 
-5. **Monitor Parsing Status**
+6. **Monitor Parsing Status**
    ```bash
    curl -X GET 'http://localhost:8001/api/v1/parsing-status/your-project-id'
    # Wait until parsing is complete
    ```
 
-6. **View Available Agents**
+7. **View Available Agents**
    ```bash
    curl -X GET 'http://localhost:8001/api/v1/list-available-agents/?list_system_agents=true'
    # Note down the agent_id you want to use
    ```
 
-7. **Create a Conversation**
+8. **Create a Conversation**
    ```bash
    curl -X POST 'http://localhost:8001/api/v1/conversations/' \
      -H 'Content-Type: application/json' \
@@ -171,7 +179,7 @@ Potpie provides a set of tools that agents can use to interact with the knowledg
    # Save the conversation_id from the response
    ```
 
-8. **Start Interacting with Your Agent**
+9. **Start Interacting with Your Agent**
    ```bash
    curl -X POST 'http://localhost:8001/api/v1/conversations/your-conversation-id/message/' \
      -H 'Content-Type: application/json' \
@@ -180,7 +188,7 @@ Potpie provides a set of tools that agents can use to interact with the knowledg
      }'
    ```
 
-9. **View Conversation History** (Optional)
+10. **View Conversation History** (Optional)
    ```bash
    curl -X GET 'http://localhost:8001/api/v1/conversations/your-conversation-id/messages/?start=0&limit=10'
    ```
